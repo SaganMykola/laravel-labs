@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Commodity;
+use App\Models\Factory;
 use Illuminate\Http\Request;
 
 class CommodityController extends Controller
@@ -20,7 +21,8 @@ class CommodityController extends Controller
      */
     public function create()
     {
-        return view('commodities.create');
+        $factories = Factory::all();
+        return view('commodities.create', compact('factories'));
     }
 
     /**

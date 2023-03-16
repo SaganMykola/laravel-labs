@@ -12,8 +12,12 @@
     <input name="manufacturer" type="text">
     <br>
 
-    <label> Factory id </label>
-    <input name="factory_id" type="number">
+    <select>
+        <option value="">Select factory code</option>
+        @foreach ($factories as $factory)
+            <option>{{$factory->id}}</option>
+        @endforeach
+    </select>
     <br>
 
     <button type="submit">
