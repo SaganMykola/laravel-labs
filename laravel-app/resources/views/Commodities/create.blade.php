@@ -12,7 +12,7 @@
     <input name="manufacturer" type="text">
     <br>
 
-    <select>
+    <select name="factory_id">
         <option value="">Select factory code</option>
         @foreach ($factories as $factory)
             <option>{{$factory->id}}</option>
