@@ -10,7 +10,7 @@
 
 <body>
 <div>
-    <table>
+    <table border="1">
         <tr>
             <th>Code</th>
             <th>Name</th>

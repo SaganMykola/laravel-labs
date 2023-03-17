@@ -11,5 +11,7 @@
 
     <a href="{{URL::to('commodities') . '/' . $commodity->id . '/edit'}}">
         Edit
-    </a>
+    </a><br>
+
+    <a href="{{URL::to('factories')}}">Return</a>
 </div>

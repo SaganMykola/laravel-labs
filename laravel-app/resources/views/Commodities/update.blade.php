@@ -3,5 +3,5 @@
 </p>
 
 <p>
-    <a href="{{URL::to('factories')}}"> Return </a>
+    <a href="{{URL::to('commodities') . '/' . $commodity->id}}"> Return </a>
 </p>
