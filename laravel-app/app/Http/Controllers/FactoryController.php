@@ -34,7 +34,7 @@ class FactoryController extends Controller
         $factory = Factory::create(
             $request->all(['name', 'number_of_employees', 'area', 'address'])
         );
-        return view('factories.store', compact('factory'));
+        return \redirect('factories');
     }
 
     /**
@@ -65,7 +65,9 @@ class FactoryController extends Controller
         $factory->area = $request->input('area');
         $factory->address = $request->input('address');
         $factory->save();
-        return view('factories.update', compact('factory'));
+
+        return \redirect('factories');
+
     }
 
 
@@ -76,6 +78,6 @@ class FactoryController extends Controller
     {
         $factory = Factory::find($id);
         $factory->delete();
-        return view('factories.destroy', compact('factory'));
+        return \redirect('factories');
     }
 }

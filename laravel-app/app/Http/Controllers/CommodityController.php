@@ -33,7 +33,7 @@ class CommodityController extends Controller
         $commodity = Commodity::create(
             $request->all(['name', 'price', 'manufacturer', 'factory_id'])
         );
-        return view('commodities.store', compact('commodity'));
+        return \redirect('factories');
     }
 
     /**
@@ -65,7 +65,7 @@ class CommodityController extends Controller
         $commodity->manufacturer = $request->input('manufacturer');
         $commodity->factory_id = $request->input('factory_id');
         $commodity->save();
-        return view('commodities.update', compact('commodity'));
+        return \redirect('commodities' . '/' . $commodity->id);
     }
 
     /**
@@ -75,6 +75,6 @@ class CommodityController extends Controller
     {
         $commodity = Commodity::find($id);
         $commodity->delete();
-        return view('commodities.destroy', compact('commodity'));
+        return \redirect('factories');
     }
 }
