@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commodity;
 use App\Models\Factory;
 use Illuminate\Http\Request;
+use App\Http\Requests\CommodityRequest;
 
 class CommodityController extends Controller
 {
@@ -28,10 +29,11 @@ class CommodityController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommodityRequest $request)
     {
+        $validated = $request->validated();
         $commodity = Commodity::create(
-            $request->all(['name', 'price', 'manufacturer', 'factory_id'])
+            $validated
         );
         return \redirect('factories');
     }
@@ -57,13 +59,14 @@ class CommodityController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommodityRequest $request, string $id)
     {
+        $validated = $request->validated();
         $commodity = Commodity::find($id);
-        $commodity->name = $request->input('name');
-        $commodity->price = $request->input('price');
-        $commodity->manufacturer = $request->input('manufacturer');
-        $commodity->factory_id = $request->input('factory_id');
+        $commodity->name = $validated['name'];
+        $commodity->price = $validated['price'];
+        $commodity->manufacturer = $validated['manufacturer'];
+        $commodity->factory_id = $validated['factory_id'];
         $commodity->save();
         return \redirect('commodities' . '/' . $commodity->id);
     }

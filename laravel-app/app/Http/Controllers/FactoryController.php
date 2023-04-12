@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Commodity;
 use App\Models\Factory;
 use Illuminate\Http\Request;
+use App\Http\Requests\FactoryRequest;
 
 class FactoryController extends Controller
 {
@@ -29,10 +30,11 @@ class FactoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(FactoryRequest $request)
     {
+        $validated = $request->validated();
         $factory = Factory::create(
-            $request->all(['name', 'number_of_employees', 'area', 'address'])
+           $validated
         );
         return \redirect('factories');
     }
@@ -57,13 +59,14 @@ class FactoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(FactoryRequest $request, string $id)
     {
+        $validated = $request->validated();
         $factory = Factory::find($id);
-        $factory->name = $request->input('name');
-        $factory->number_of_employees = $request->input('number_of_employees');
-        $factory->area = $request->input('area');
-        $factory->address = $request->input('address');
+        $factory->name =  $validated['name'];
+        $factory->number_of_employees =  $validated['number_of_employees'];
+        $factory->area =  $validated['area'];
+        $factory->address =  $validated['address'];
         $factory->save();
 
         return \redirect('factories');
