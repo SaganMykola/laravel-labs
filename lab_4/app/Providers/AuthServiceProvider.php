@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use App\Models\User;
 use App\Models\Factory;
 use App\Models\Commodity;
+use Illuminate\Support\Facades\Auth;
 class AuthServiceProvider extends ServiceProvider
 {
     /**
@@ -24,20 +25,24 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('delete-factory', function (?User $user, ?Factory $factory) {
-            if ($user->role == 'superadmin') {
-                return true;
-            }
-            if ($factory->user_id == $user->id){
-                return true;
+            if(Auth::check()) {
+                if ($user->role == 'superadmin') {
+                    return true;
+                }
+                if ($factory->user_id == $user->id) {
+                    return true;
+                }
             }
             return false;
         });
         Gate::define('edit-factory', function (?User $user, ?Factory $factory) {
-            if ($user->role == 'superadmin' or $user->role == 'editor') {
-                return true;
-            }
-            if ($factory->user_id == $user->id){
-                return true;
+            if(Auth::check()) {
+                if ($user->role == 'superadmin' or $user->role == 'editor') {
+                    return true;
+                }
+                if ($factory->user_id == $user->id) {
+                    return true;
+                }
             }
             return false;
         });
