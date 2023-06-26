@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Commodity;
 use App\Models\Factory;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Requests\FactoryRequest;
 use Illuminate\Support\Facades\Gate;
@@ -17,7 +18,8 @@ class FactoryController extends Controller
     {
         $factories = Factory::all();
         $commodities = Commodity::all();
-        return view('factories.index', compact('factories', 'commodities'));
+        $users = User::all();
+        return view('factories.index', compact('factories', 'commodities', 'users'));
     }
 
     /**

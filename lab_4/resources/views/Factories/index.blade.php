@@ -1,7 +1,34 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="ml-4">
+{{--@if(Auth::user()->role == 'moderator')--}}
+    <div class="flex justify-end max-w-7xl">
+        <x-role-transfer>
+            <x-slot name="button">
+                <button>
+                    Button
+                </button>
+            </x-slot>
+
+            <x-slot name="users">
+                @foreach($users as $user)
+                    <form  method="POST" action="{{route('users.update', $user->id)}}">
+                        @csrf
+                        @if($user->role != 'moderator')
+                            <input type="hidden" name="role" value="moderator">
+
+                            <button type="submit">
+                                {{$user->role}}
+                            </button>
+                        @endif
+                    </form>
+                @endforeach
+            </x-slot>
+        </x-role-transfer>
+    </div>
+{{--@endif--}}
+
+<div class="ml-4 align-baseline">
     <table class="border border-black">
         <tr class="border border-black color bg-gray-200">
             <th class="border border-black px-5">Code</th>

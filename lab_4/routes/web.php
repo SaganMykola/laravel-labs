@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FactoryController;
 use App\Http\Controllers\CommodityController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('/factories', FactoryController::class);
+
+Route::post('/users/{id}', [UserController::class, 'update'])->name('users.update');
 
 Route::post('/factories', [FactoryController::class, 'store'])
     ->name('factories.store');
